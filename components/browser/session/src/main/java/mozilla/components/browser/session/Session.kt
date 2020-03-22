@@ -55,6 +55,7 @@ class Session(
     val private: Boolean = false,
     val source: Source = Source.NONE,
     val id: String = UUID.randomUUID().toString(),
+    val contextId: String? = null,
     delegate: Observable<Observer> = ObserverRegistry()
 ) : Observable<Session.Observer> by delegate {
     /**
