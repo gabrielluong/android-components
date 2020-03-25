@@ -291,6 +291,7 @@ class ToolbarActivity : AppCompatActivity() {
         toolbar.display.indicators = listOf(
             DisplayToolbar.Indicators.SECURITY,
             DisplayToolbar.Indicators.TRACKING_PROTECTION,
+            DisplayToolbar.Indicators.CONTAINER,
             DisplayToolbar.Indicators.EMPTY
         )
 

@@ -78,6 +78,13 @@ class ToolbarPresenter(
 
                 else -> SiteTrackingProtection.OFF_GLOBALLY
             }
+
+            toolbar.container = when {
+                tab.contextId == "Personal" -> Toolbar.Container.PERSONAL
+                tab.contextId == "Shopping" -> Toolbar.Container.SHOPPING
+                tab.contextId == "Work" -> Toolbar.Container.WORK
+                else -> Toolbar.Container.NONE
+            }
         } else {
             clear()
         }
@@ -93,5 +100,7 @@ class ToolbarPresenter(
         toolbar.siteSecure = Toolbar.SiteSecurity.INSECURE
 
         toolbar.siteTrackingProtection = SiteTrackingProtection.OFF_GLOBALLY
+
+        toolbar.container = Toolbar.Container.NONE
     }
 }

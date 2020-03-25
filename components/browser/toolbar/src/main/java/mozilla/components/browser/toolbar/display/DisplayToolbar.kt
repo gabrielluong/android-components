@@ -76,6 +76,7 @@ class DisplayToolbar internal constructor(
     enum class Indicators {
         SECURITY,
         TRACKING_PROTECTION,
+        CONTAINER,
         EMPTY
     }
 
@@ -149,6 +150,7 @@ class DisplayToolbar internal constructor(
         origin = rootView.findViewById<OriginView>(R.id.mozac_browser_toolbar_origin_view).also {
             it.toolbar = toolbar
         },
+        containerIndicator = rootView.findViewById(R.id.mozac_browser_toolbar_container_indicator),
         progress = rootView.findViewById<ProgressBar>(R.id.mozac_browser_toolbar_progress).apply {
             accessibilityDelegate = object : View.AccessibilityDelegate() {
                 override fun onInitializeAccessibilityEvent(host: View?, event: AccessibilityEvent?) {
@@ -404,6 +406,14 @@ class DisplayToolbar internal constructor(
             View.GONE
         }
 
+        views.containerIndicator.visibility = if (
+            !urlEmpty && indicators.contains(Indicators.CONTAINER)
+        ) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+
         views.emptyIndicator.visibility = if (urlEmpty && indicators.contains(Indicators.EMPTY)) {
             View.VISIBLE
         } else {
@@ -481,6 +491,10 @@ class DisplayToolbar internal constructor(
 
         views.trackingProtectionIndicator.siteTrackingProtection = state
         updateSeparatorVisibility()
+    }
+
+    internal fun setContainerState(state: Toolbar.Container) {
+        views.containerIndicator.container = state
     }
 
     internal fun onStop() {
@@ -607,5 +621,6 @@ internal class DisplayToolbarViews(
     val securityIndicator: SiteSecurityIconView,
     val trackingProtectionIndicator: TrackingProtectionIconView,
     val origin: OriginView,
+    val containerIndicator: ContainerIconView,
     val progress: ProgressBar
 )

@@ -52,6 +52,8 @@ interface Toolbar {
      */
     var siteTrackingProtection: SiteTrackingProtection
 
+    var container: Container
+
     /**
      * Displays the currently used search terms as part of this Toolbar.
      *
@@ -407,5 +409,12 @@ interface Toolbar {
          * Tracking protection has been disabled for all sites.
          */
         OFF_GLOBALLY,
+    }
+
+    enum class Container {
+        PERSONAL,
+        SHOPPING,
+        WORK,
+        NONE
     }
 }

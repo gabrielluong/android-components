@@ -115,6 +115,15 @@ class BrowserToolbar @JvmOverloads constructor(
             }
         }
 
+    override var container: Toolbar.Container =
+        Toolbar.Container.NONE
+        set(value) {
+            if (field != value) {
+                display.setContainerState(value)
+                field = value
+            }
+        }
+
     override var private: Boolean
         get() = edit.private
         set(value) { edit.private = value }
