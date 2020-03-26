@@ -251,6 +251,7 @@ internal class EngineObserver(
     }
 
     override fun onWebAppManifestLoaded(manifest: WebAppManifest) {
+        manifest.contextId = session.contextId
         session.webAppManifest = manifest
     }
 

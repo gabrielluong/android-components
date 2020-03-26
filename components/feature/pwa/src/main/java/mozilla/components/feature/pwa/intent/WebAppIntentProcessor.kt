@@ -45,7 +45,12 @@ class WebAppIntentProcessor(
         return if (!url.isNullOrEmpty() && matches(intent)) {
             val webAppManifest = storage.loadManifest(url) ?: return false
 
-            val session = Session(url, private = false, source = Source.HOME_SCREEN)
+            val session = Session(
+                url,
+                private = false,
+                source = Source.HOME_SCREEN,
+                contextId = webAppManifest.contextId
+            )
             session.webAppManifest = webAppManifest
             session.customTabConfig = webAppManifest.toCustomTabConfig()
 

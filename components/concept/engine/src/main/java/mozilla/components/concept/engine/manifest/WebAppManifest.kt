@@ -61,7 +61,8 @@ data class WebAppManifest(
     @ColorInt val themeColor: Int? = null,
     val relatedApplications: List<ExternalApplicationResource> = emptyList(),
     val preferRelatedApplications: Boolean = false,
-    val shareTarget: ShareTarget? = null
+    val shareTarget: ShareTarget? = null,
+    var contextId: String? = null
 ) {
     /**
      * Defines the developers’ preferred display mode for the website.

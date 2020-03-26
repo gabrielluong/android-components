@@ -66,7 +66,8 @@ class WebAppManifestParser {
                 orientation = parseOrientation(json),
                 relatedApplications = parseRelatedApplications(json),
                 preferRelatedApplications = json.optBoolean("prefer_related_applications", false),
-                shareTarget = ShareTargetParser.parse(json.optJSONObject("share_target"))
+                shareTarget = ShareTargetParser.parse(json.optJSONObject("share_target")),
+                contextId = json.tryGetString("context_id")
             ))
         } catch (e: JSONException) {
             Result.Failure(e)
@@ -100,6 +101,7 @@ class WebAppManifestParser {
         put("related_applications", serializeRelatedApplications(manifest.relatedApplications))
         put("prefer_related_applications", manifest.preferRelatedApplications)
         putOpt("share_target", ShareTargetParser.serialize(manifest.shareTarget))
+        put("context_id", manifest.contextId)
     }
 }
 
