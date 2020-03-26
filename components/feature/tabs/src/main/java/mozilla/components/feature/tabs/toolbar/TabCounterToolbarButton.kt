@@ -29,7 +29,7 @@ class TabCounterToolbarButton(
 
         val view = TabCounter(parent.context).apply {
             reference = WeakReference(this)
-            setCount(sessionManager.sessions.size)
+            setCount(getCount())
             setOnClickListener {
                 it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                 showTabs.invoke()
@@ -46,8 +46,15 @@ class TabCounterToolbarButton(
 
     override fun bind(view: View) = Unit
 
+    private fun getCount() : Int {
+        val selectedContextId = sessionManager.selectedSessionOrThrow.contextId
+        return sessionManager.sessions.filter { it.contextId == selectedContextId }.size
+    }
+
     private fun updateCount() {
-        reference.get()?.setCountWithAnimation(sessionManager.sessions.size)
+        val selectedContextId = sessionManager.selectedSessionOrThrow.contextId
+        val count = sessionManager.sessions.filter { it.contextId == selectedContextId }.size
+        reference.get()?.setCountWithAnimation(count)
     }
 
     private val sessionManagerObserver = object : SessionManager.Observer {
