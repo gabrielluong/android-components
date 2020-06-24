@@ -52,8 +52,7 @@ class BrowserThumbnails(
         }
     }
 
-    @VisibleForTesting
-    internal fun requestScreenshot() {
+    fun requestScreenshot() {
         if (!isLowOnMemory()) {
             engineView.captureThumbnail {
                 val bitmap = it ?: return@captureThumbnail

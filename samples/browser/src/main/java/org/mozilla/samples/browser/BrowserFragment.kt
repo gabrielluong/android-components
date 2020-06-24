@@ -161,6 +161,11 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
     override fun onBackPressed(): Boolean =
         readerViewFeature.onBackPressed() || super.onBackPressed()
 
+    override fun onPause() {
+        thumbnailsFeature.get()?.requestScreenshot()
+        super.onPause()
+    }
+
     companion object {
         fun create(sessionId: String? = null) = BrowserFragment().apply {
             arguments = Bundle().apply {
